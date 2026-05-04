@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scrolling Site</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #000;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      min-height: calc(100vh - 0px);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* ── Outer card ── */
+    .display {
+      width: 700px;
+      height: 490px;
+      background: #000;
+      border: 1px solid #222;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── Logo bar ── */
+    .logo-bar {
+      flex-shrink: 0;
+      padding: 12px 16px 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-bar img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .logo-bar .brand {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── Scroll viewport ── */
+    .scroll-viewport {
+      flex: 1;
+      overflow: hidden;
+      padding: 0 24px 12px;
+      position: relative;
+    }
+
+    /* Fade-out mask at the bottom */
+    .scroll-viewport::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 48px;
+      background: linear-gradient(transparent, #000);
+      pointer-events: none;
+    }
+
+    .scroll-track {
+      /* will be moved via JS */
+    }
+
+    ul.items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    ul.items li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.6;
+      padding: 5px 0;
+    }
+
+    ul.items li::before {
+      content: '•';
+      color: #aaa;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="display">
+
+  <!-- LOGO BAR -->
+  <div class="logo-bar">
+    <!-- Replace src with your actual logo URL -->
+    <img
+      src="https://via.placeholder.com/48x48/333/fff?text=Logo"
+      alt="Company Logo"
+    />
+    <span class="brand">Your Brand Name</span>
+  </div>
+
+  <!-- SCROLLING TEXT AREA -->
+  <div class="scroll-viewport" id="viewport">
+    <div class="scroll-track" id="track">
+      <ul class="items" id="list">
+        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+        <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+        <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</li>
+        <li>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+        <li>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam.</li>
+        <li>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.</li>
+        <li>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet consectetur adipisci velit sed quia non numquam.</li>
+        <li>Ut labore et dolore magnam aliquam quaerat voluptatem enim ad minima veniam quis nostrum exercitationem ullam.</li>
+        <li>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur vel illum.</li>
+        <li>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti.</li>
+        <li>Nam libero tempore cum soluta nobis eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere.</li>
+        <li>Temporibus autem quibusdam et aut officiis debitis rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const track = document.getElementById('track');
+  const viewport = document.getElementById('viewport');
+
+  let offsetY = 0;
+  const speed = 0.4; // pixels per frame — adjust to taste
+
+  function getMaxScroll() {
+    return track.scrollHeight - viewport.clientHeight;
+  }
+
+  function tick() {
+    offsetY += speed;
+    if (offsetY >= getMaxScroll()) {
+      offsetY = 0; // instant jump back to top
+    }
+    track.style.transform = `translateY(${-offsetY}px)`;
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+</script>
+
+</body>
+</html>

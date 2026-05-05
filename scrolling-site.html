@@ -94,6 +94,10 @@
       flex-shrink: 0;
       margin-top: 1px;
     }
+
+    ul.items li.indent::before {
+      visibility: hidden;
+    }
   </style>
 </head>
 <body>
@@ -115,7 +119,7 @@
     <div class="scroll-track" id="track">
       <ul class="items" id="list">
         <li>Welcome back! We hope everyone had a nice Golden Week.</li>
-        <li>連休中はゆっくりお過ごしいただけましたでしょうか。今後ともよろしくお願いいたします。</li>
+        <li class="indent">連休中はゆっくりお過ごしいただけましたでしょうか。今後ともよろしくお願いいたします。</li>
         <br>
         <li>As outlined in the new Work Rules, overtime, work from home (WFH), and weekend work will require prior application and approval going forward. Instructions are in the following SharePoint folder.</li>
         <li>新しい就業規則に記載の通り、今後は在宅勤務・残業・週末勤務については事前申請・承認制となります。詳細な手順については、以下のSharePointフォルダーをご参照ください。</li>

@@ -182,8 +182,10 @@
       // Fade back in
       track.style.opacity = '1';
       setTimeout(() => {
-        pausing = false;
-        requestAnimationFrame(tick);
+        setTimeout(() => {
+          pausing = false;
+          requestAnimationFrame(tick);
+        }, pauseDuration);
       }, fadeDuration);
     }, fadeDuration);
   }
@@ -201,7 +203,11 @@
     requestAnimationFrame(tick);
   }
 
-  requestAnimationFrame(tick);
+  pausing = true;
+  setTimeout(() => {
+    pausing = false;
+    requestAnimationFrame(tick);
+  }, pauseDuration);
 </script>
 
 </body>
